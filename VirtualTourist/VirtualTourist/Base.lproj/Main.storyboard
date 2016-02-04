@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-do-hAl">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gFu-do-hAl" secondAttribute="trailing" id="TfR-Ch-bgq"/>
+                            <constraint firstItem="gFu-do-hAl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jMx-Yz-ARN"/>
+                            <constraint firstItem="gFu-do-hAl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="niW-98-GHd"/>
+                            <constraint firstItem="gFu-do-hAl" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="yqe-Wl-23u"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="gFu-do-hAl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="TfR-Ch-bgq"/>
+                                <exclude reference="jMx-Yz-ARN"/>
+                                <exclude reference="niW-98-GHd"/>
+                                <exclude reference="yqe-Wl-23u"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="gFu-do-hAl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="TfR-Ch-bgq"/>
+                                <include reference="jMx-Yz-ARN"/>
+                                <include reference="niW-98-GHd"/>
+                                <include reference="yqe-Wl-23u"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="gFu-do-hAl" id="VN2-22-xvd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.5" y="362"/>
+        </scene>
+    </scenes>
+</document>
