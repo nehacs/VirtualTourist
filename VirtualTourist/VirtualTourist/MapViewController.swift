@@ -32,28 +32,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude), completionHandler: {(placemarks, error) -> Void in
                 
-                // TODO: Might need to move this into dispatch async
                 if error != nil {
                     print("Reverse geocoder failed with error" + error!.localizedDescription)
                     return
                 }
                 
-                if placemarks!.count > 0 {
-                    let pm = placemarks![0] as CLPlacemark
-                    
-                    // not all places have thoroughfare & subThoroughfare so validate those values
-                    annotation.title = pm.thoroughfare! + ", " + pm.subThoroughfare!
-                    annotation.subtitle = pm.subLocality
-                    self.mapView.addAnnotation(annotation)
-                }
-                else {
-                    annotation.title = "Unknown Place"
-                    self.mapView.addAnnotation(annotation)
-                    print("Problem with the data received from geocoder")
-                }
                 self.mapView.addAnnotation(annotation)
             })
         }
+    }
+    
+    // This delegate method is implemented to respond to taps on the pin annotation.
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("CollectionController") as! CollectionViewController
+        controller.setMapViewAnnotation(view.annotation!)
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 }
 
