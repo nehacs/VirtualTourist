@@ -26,8 +26,9 @@ class FlickrClient: NSObject {
     func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, success:Bool, error: String?) -> Void) -> NSURLSessionDataTask {
         /* Set the parameters */
         var mutableParameters = parameters
-        mutableParameters[ParameterKeys.ApiKey] = Constants.RestApiKey
         mutableParameters[ParameterKeys.Method] = method
+        mutableParameters[ParameterKeys.ApiKey] = Constants.RestApiKey
+        mutableParameters[ParameterKeys.Extras] = Constants.Extras
         mutableParameters[ParameterKeys.Format] = Constants.Format
         mutableParameters[ParameterKeys.NoJsonCallback] = Constants.NoJsonCallback
         
