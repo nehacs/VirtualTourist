@@ -49,12 +49,13 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
                         self.photos.append(newPhoto)
                     }
                 }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.collectionView?.reloadData()
+                }
             } else {
                 print(errorString)
             }
         }
-
-        collectionView?.reloadData()
     }
 
     @IBAction func doneAction(sender: AnyObject) {
