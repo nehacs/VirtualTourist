@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class CollectionViewController: UIViewController, UICollectionViewDelegate {
+class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collection: UICollectionView!
@@ -32,6 +32,8 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         
         self.collectionFlowLayout.minimumInteritemSpacing = space
         self.collectionFlowLayout.itemSize = CGSizeMake(dimension, dimension)
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     override func viewWillAppear(animated: Bool) {
