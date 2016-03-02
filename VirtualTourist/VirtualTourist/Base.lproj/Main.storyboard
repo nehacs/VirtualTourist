@@ -119,9 +119,7 @@
                         <constraints>
                             <constraint firstItem="QZz-wD-w73" firstAttribute="top" secondItem="n7z-PR-4N8" secondAttribute="bottom" id="58E-yc-kRh"/>
                             <constraint firstItem="gkW-d5-RlO" firstAttribute="top" secondItem="Dld-Gk-IG3" secondAttribute="bottom" id="Ltv-c6-oNH"/>
-                            <constraint firstItem="n7z-PR-4N8" firstAttribute="top" secondItem="Dld-Gk-IG3" secondAttribute="bottom" constant="217" id="ivj-Hd-063"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gkW-d5-RlO" secondAttribute="trailing" constant="-15" id="qls-vf-fOO"/>
-                            <constraint firstItem="n7z-PR-4N8" firstAttribute="centerX" secondItem="sgm-sw-SBA" secondAttribute="centerX" id="vf6-lN-N71"/>
                             <constraint firstItem="gkW-d5-RlO" firstAttribute="leading" secondItem="sgm-sw-SBA" secondAttribute="leadingMargin" constant="-15" id="zQN-mW-VCO"/>
                         </constraints>
                         <variation key="default">
@@ -135,8 +133,6 @@
                                 <exclude reference="Ltv-c6-oNH"/>
                                 <exclude reference="qls-vf-fOO"/>
                                 <exclude reference="zQN-mW-VCO"/>
-                                <exclude reference="ivj-Hd-063"/>
-                                <exclude reference="vf6-lN-N71"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -150,14 +146,13 @@
                                 <include reference="Ltv-c6-oNH"/>
                                 <include reference="qls-vf-fOO"/>
                                 <include reference="zQN-mW-VCO"/>
-                                <include reference="ivj-Hd-063"/>
-                                <include reference="vf6-lN-N71"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="collection" destination="n7z-PR-4N8" id="zel-cV-Zx7"/>
                         <outlet property="collectionFlowLayout" destination="Iko-Pn-Vyd" id="yEv-al-4pE"/>
+                        <outlet property="collectionView" destination="n7z-PR-4N8" id="owb-lL-Mtx"/>
                         <outlet property="mapView" destination="izx-eh-VeA" id="ZNM-hw-vhU"/>
                     </connections>
                 </viewController>

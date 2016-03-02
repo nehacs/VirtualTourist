@@ -7,6 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct Photo {
+    let image:UIImage
+
+    init(image:UIImage) {
+        self.image = image
+    }
 }

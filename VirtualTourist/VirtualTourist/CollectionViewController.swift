@@ -14,9 +14,10 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var collectionFlowLayout: UICollectionViewFlowLayout!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+
     var annotation: MKAnnotation!
-    var photos: [Photo]!
+    var photos = [Photo]()
     
     func setMapViewAnnotation(annotation: MKAnnotation) {
         self.annotation = annotation;
@@ -26,14 +27,6 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         self.mapView.addAnnotation(annotation);
         self.mapView.centerCoordinate = annotation.coordinate
         
-        FlickrClient.sharedInstance().getPhotosForLocation(annotation.coordinate) { (success, photos, errorString) in
-            if success {
-                print("count \(photos.count)")
-            } else {
-                print(errorString)
-            }
-        }
-        
         let space: CGFloat = 3.0
         let dimension: CGFloat = (self.view.frame.size.width - (2*space))/3.0
         
@@ -41,6 +34,27 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         self.collectionFlowLayout.itemSize = CGSizeMake(dimension, dimension)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        FlickrClient.sharedInstance().getPhotosForLocation(annotation.coordinate) { (success, results, errorString) in
+            if success {
+                for (photo) in results {
+                    let imageUrlString = photo[FlickrClient.JSONResponseKeys.Url] as? String
+                    let imageURL = NSURL(string: imageUrlString!)
+                    let imageData = NSData(contentsOfURL: imageURL!)
+                    if (imageData != nil) {
+                        let newPhoto = Photo(image: UIImage(data: imageData!)!)
+                        self.photos.append(newPhoto)
+                    }
+                }
+            } else {
+                print(errorString)
+            }
+        }
+
+        collectionView?.reloadData()
+    }
+
     @IBAction func doneAction(sender: AnyObject) {
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
         self.presentViewController(controller, animated: true, completion: nil)
@@ -51,22 +65,18 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
+        print("added image at index:  \(indexPath.row)")
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoReuseID", forIndexPath: indexPath) as! CollectionViewCell
         
-//        let photo = photos[indexPath.row]
-//        let photoImageView = UIImageView(image: photo.image)
-//        
-//        photoImageView.contentMode = UIViewContentMode.Redraw
-//        cell.photo.image = photoImageView.image
+        let photo = photos[indexPath.row]
+        let photoImageView = UIImageView(image: photo.image)
+
+        photoImageView.contentMode = UIViewContentMode.Redraw
+        cell.photo.image = photoImageView.image
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
         // TODO: Tapping on a photo should remove it from the collection
-        
-//        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-//        detailController.meme = self.memes[indexPath.row]
-//        self.navigationController!.pushViewController(detailController, animated: true)
     }
 }
