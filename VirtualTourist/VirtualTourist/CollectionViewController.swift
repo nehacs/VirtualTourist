@@ -31,6 +31,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         let dimension: CGFloat = (self.view.frame.size.width - (2*space))/3.0
         
         self.collectionFlowLayout.minimumInteritemSpacing = space
+        self.collectionFlowLayout.minimumLineSpacing = space
         self.collectionFlowLayout.itemSize = CGSizeMake(dimension, dimension)
         collectionView.delegate = self
         collectionView.dataSource = self
