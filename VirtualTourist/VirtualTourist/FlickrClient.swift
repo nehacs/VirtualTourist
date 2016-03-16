@@ -31,6 +31,7 @@ class FlickrClient: NSObject {
         mutableParameters[ParameterKeys.Extras] = Constants.Extras
         mutableParameters[ParameterKeys.Format] = Constants.Format
         mutableParameters[ParameterKeys.NoJsonCallback] = Constants.NoJsonCallback
+        mutableParameters[ParameterKeys.PerPage] = Constants.PerPage
         
         /* Build the URL and configure the request */
         let urlString = Constants.BaseURLSecure + FlickrClient.escapedParameters(mutableParameters)

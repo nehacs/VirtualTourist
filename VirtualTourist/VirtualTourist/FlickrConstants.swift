@@ -24,6 +24,7 @@ extension FlickrClient {
         static let Format: String = "json"
         static let NoJsonCallback: String = "1"
         static let Extras: String = "url_m"
+        static let PerPage: String = "20"
     }
     
     struct Methods {
@@ -44,6 +45,7 @@ extension FlickrClient {
         static let Latitude = "lat"
         static let Longitude = "lon"
         static let Extras = "extras"
+        static let PerPage = "per_page"
     }
     
     // MARK: JSON Response Keys

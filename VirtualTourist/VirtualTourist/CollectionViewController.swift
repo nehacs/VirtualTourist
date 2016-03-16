@@ -48,9 +48,6 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
                     if (imageData != nil) {
                         let newPhoto = Photo(image: UIImage(data: imageData!)!)
                         self.photos.append(newPhoto)
-                        if (self.photos.count == 10) {
-                            break
-                        }
                     }
                 }
                 dispatch_async(dispatch_get_main_queue()) {
