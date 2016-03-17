@@ -15,7 +15,8 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var collectionFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var newCollection: UIBarButtonItem!
+    
     var annotation: MKAnnotation!
     var photos = [Photo]()
     
@@ -39,6 +40,15 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        fetchPhotos()
+    }
+
+    func fetchPhotos() {
+        // Reset the collection view to empty
+        photos = [Photo]()
+        self.collectionView.reloadData()
+        
+        // Fetch new photos
         FlickrClient.sharedInstance().getPhotosForLocation(annotation.coordinate) { (success, results, errorString) in
             if success {
                 for (photo) in results {
@@ -52,18 +62,24 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
                 }
                 dispatch_async(dispatch_get_main_queue()) {
                     self.collectionView?.reloadData()
+                    self.newCollection.enabled = true
                 }
             } else {
                 print(errorString)
             }
         }
     }
-
+    
     @IBAction func doneAction(sender: AnyObject) {
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
+    @IBAction func newCollectionAction(sender: AnyObject) {
+        self.newCollection.enabled = false
+        fetchPhotos()
+    }
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.photos.count
     }

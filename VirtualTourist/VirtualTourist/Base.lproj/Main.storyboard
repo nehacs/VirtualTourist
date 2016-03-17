@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -143,18 +143,34 @@
                                     </mask>
                                 </variation>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgm-J8-Q4t">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8jT-AA-M0b"/>
+                                    <barButtonItem enabled="NO" title="New Collection" id="E2b-sm-hby">
+                                        <connections>
+                                            <action selector="newCollectionAction:" destination="ZHT-6O-Db1" id="BHR-DH-t1r"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="shN-A2-RaR"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="n7z-PR-4N8" firstAttribute="top" secondItem="izx-eh-VeA" secondAttribute="bottom" constant="8" id="25I-bv-pZ1"/>
+                            <constraint firstItem="n7z-PR-4N8" firstAttribute="top" secondItem="izx-eh-VeA" secondAttribute="bottom" constant="8" id="25I-bv-pZ1">
+                                <variation key="widthClass=compact" constant="2"/>
+                            </constraint>
                             <constraint firstItem="QZz-wD-w73" firstAttribute="top" secondItem="n7z-PR-4N8" secondAttribute="bottom" id="58E-yc-kRh"/>
+                            <constraint firstItem="qgm-J8-Q4t" firstAttribute="bottom" secondItem="QZz-wD-w73" secondAttribute="top" id="B7s-3b-9Kt"/>
                             <constraint firstItem="n7z-PR-4N8" firstAttribute="leading" secondItem="izx-eh-VeA" secondAttribute="leading" id="L0M-lk-33o"/>
                             <constraint firstItem="gkW-d5-RlO" firstAttribute="top" secondItem="Dld-Gk-IG3" secondAttribute="bottom" id="Ltv-c6-oNH"/>
                             <constraint firstItem="n7z-PR-4N8" firstAttribute="centerX" secondItem="gkW-d5-RlO" secondAttribute="centerX" id="Pcg-Ub-jT0"/>
                             <constraint firstItem="izx-eh-VeA" firstAttribute="top" secondItem="Dld-Gk-IG3" secondAttribute="bottom" constant="39" id="bns-5F-ysl"/>
-                            <constraint firstItem="n7z-PR-4N8" firstAttribute="top" secondItem="izx-eh-VeA" secondAttribute="bottom" constant="8" symbolic="YES" id="fNa-3R-4ik"/>
                             <constraint firstItem="n7z-PR-4N8" firstAttribute="leading" secondItem="sgm-sw-SBA" secondAttribute="leading" id="ise-Pd-JRm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gkW-d5-RlO" secondAttribute="trailing" constant="-15" id="qls-vf-fOO"/>
+                            <constraint firstItem="qgm-J8-Q4t" firstAttribute="trailing" secondItem="n7z-PR-4N8" secondAttribute="trailing" id="shu-2x-hjN"/>
+                            <constraint firstItem="qgm-J8-Q4t" firstAttribute="leading" secondItem="n7z-PR-4N8" secondAttribute="leading" id="wGV-3k-fmo"/>
                             <constraint firstItem="gkW-d5-RlO" firstAttribute="leading" secondItem="sgm-sw-SBA" secondAttribute="leadingMargin" constant="-15" id="zQN-mW-VCO"/>
                             <constraint firstItem="n7z-PR-4N8" firstAttribute="trailing" secondItem="izx-eh-VeA" secondAttribute="trailing" id="zdc-iZ-Le6"/>
                         </constraints>
@@ -163,9 +179,9 @@
                                 <exclude reference="gkW-d5-RlO"/>
                                 <exclude reference="izx-eh-VeA"/>
                                 <exclude reference="n7z-PR-4N8"/>
+                                <exclude reference="qgm-J8-Q4t"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="58E-yc-kRh"/>
                                 <exclude reference="Ltv-c6-oNH"/>
                                 <exclude reference="qls-vf-fOO"/>
                                 <exclude reference="zQN-mW-VCO"/>
@@ -173,9 +189,12 @@
                                 <exclude reference="25I-bv-pZ1"/>
                                 <exclude reference="L0M-lk-33o"/>
                                 <exclude reference="Pcg-Ub-jT0"/>
-                                <exclude reference="fNa-3R-4ik"/>
                                 <exclude reference="ise-Pd-JRm"/>
                                 <exclude reference="zdc-iZ-Le6"/>
+                                <exclude reference="B7s-3b-9Kt"/>
+                                <exclude reference="shu-2x-hjN"/>
+                                <exclude reference="wGV-3k-fmo"/>
+                                <exclude reference="58E-yc-kRh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -183,9 +202,9 @@
                                 <include reference="gkW-d5-RlO"/>
                                 <include reference="izx-eh-VeA"/>
                                 <include reference="n7z-PR-4N8"/>
+                                <include reference="qgm-J8-Q4t"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="58E-yc-kRh"/>
                                 <include reference="Ltv-c6-oNH"/>
                                 <include reference="qls-vf-fOO"/>
                                 <include reference="zQN-mW-VCO"/>
@@ -193,9 +212,12 @@
                                 <include reference="25I-bv-pZ1"/>
                                 <include reference="L0M-lk-33o"/>
                                 <include reference="Pcg-Ub-jT0"/>
-                                <include reference="fNa-3R-4ik"/>
                                 <include reference="ise-Pd-JRm"/>
                                 <include reference="zdc-iZ-Le6"/>
+                                <include reference="B7s-3b-9Kt"/>
+                                <include reference="shu-2x-hjN"/>
+                                <include reference="wGV-3k-fmo"/>
+                                <include reference="58E-yc-kRh"/>
                             </mask>
                         </variation>
                     </view>
@@ -204,6 +226,7 @@
                         <outlet property="collectionFlowLayout" destination="Iko-Pn-Vyd" id="yEv-al-4pE"/>
                         <outlet property="collectionView" destination="n7z-PR-4N8" id="owb-lL-Mtx"/>
                         <outlet property="mapView" destination="izx-eh-VeA" id="ZNM-hw-vhU"/>
+                        <outlet property="newCollection" destination="E2b-sm-hby" id="L7z-px-Tpv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6J-cm-ORS" userLabel="First Responder" sceneMemberID="firstResponder"/>
