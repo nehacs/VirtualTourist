@@ -1,0 +1,10 @@
+Fix
+# Download random images
+# New collection should get new images
+# Show placeholder for each image while it is being downloaded
+# Fix issues mentioned in the udacity comment -- specifically memory leak wrt creating a new controller each time
+
+Todo
+# Clicking on photo should delete it
+# Collection should move up to fill the view when the photo is deleted
+# Persistence
