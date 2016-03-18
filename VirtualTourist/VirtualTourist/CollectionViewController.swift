@@ -45,12 +45,19 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
 
     func fetchPhotos() {
         // Reset the collection view to empty
-        photos = [Photo]()
-        self.collectionView.reloadData()
+        clearPhotos()
         
         // Fetch new photos
         FlickrClient.sharedInstance().getPhotosForLocation(annotation.coordinate) { (success, results, errorString) in
             if success {
+//                if (results.count > 0) {
+//                    let newPhoto = Photo(image: UIImage(named: "Placeholder")!)
+//                    for _ in 1...results.count {
+//                        self.photos.append(newPhoto);
+//                    }
+//                    self.collectionView?.reloadData()
+//                    print("Done")
+//                }
                 for (photo) in results {
                     let imageUrlString = photo[FlickrClient.JSONResponseKeys.Url] as? String
                     let imageURL = NSURL(string: imageUrlString!)
@@ -68,6 +75,11 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
                 print(errorString)
             }
         }
+    }
+    
+    func clearPhotos() {
+        photos = [Photo]()
+        self.collectionView.reloadData()
     }
     
     @IBAction func doneAction(sender: AnyObject) {
