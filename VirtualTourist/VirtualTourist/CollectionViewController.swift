@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -43,6 +44,28 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         fetchPhotos()
     }
 
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    // Step 1 - Add the lazy fetchedResultsController property. See the reference sheet in the lesson if you
+    // want additional help creating this property.
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+    }()
+    
     func fetchPhotos() {
         // Reset the collection view to empty
         clearPhotos()
