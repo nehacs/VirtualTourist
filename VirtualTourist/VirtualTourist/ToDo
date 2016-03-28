@@ -15,3 +15,12 @@ Todo
 Questions
 # Ask question on placeholder image?
 # Ask question on what to do if there are 100s of pictures.
+
+Mapping
+# FavoriteActorViewController == MapViewController
+# ActorPickedViewController == Dropping a pin (so... still the MapViewController)
+# MovieListViewController = CollectionViewController
+# Download ColorCollection.zip https://drive.google.com/file/d/0B0hZNaF8kbHhdDVZRjh5VDc1NVk/view?usp=sharing
+# NSFetchedResultsController can be used to manage changes to a UICollectionView using the ColorCollection example. It is typically meant for tables.
+# Person == Location
+# Movie == Photo
