@@ -20,7 +20,7 @@ class Location : NSManagedObject {
     @NSManaged var id: NSNumber
     @NSManaged var lat: String?
     @NSManaged var long: String?
-    @NSManaged var photos: [PhotoModel]
+    @NSManaged var photos: [Photo]
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
