@@ -19,7 +19,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     @IBOutlet weak var newCollection: UIBarButtonItem!
     
     var annotation: MKAnnotation!
-    var photos = [Photo]()
+    var photos = [PhotoData]()
     
     func setMapViewAnnotation(annotation: MKAnnotation) {
         self.annotation = annotation;
@@ -86,7 +86,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
                     let imageURL = NSURL(string: imageUrlString!)
                     let imageData = NSData(contentsOfURL: imageURL!)
                     if (imageData != nil) {
-                        let newPhoto = Photo(image: UIImage(data: imageData!)!)
+                        let newPhoto = PhotoData(image: UIImage(data: imageData!)!)
                         self.photos.append(newPhoto)
                     }
                 }
@@ -101,7 +101,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func clearPhotos() {
-        photos = [Photo]()
+        photos = [PhotoData]()
         self.collectionView.reloadData()
     }
     
