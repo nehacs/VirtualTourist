@@ -24,3 +24,4 @@ Mapping
 # NSFetchedResultsController can be used to manage changes to a UICollectionView using the ColorCollection example. It is typically meant for tables.
 # Person == Location
 # Movie == Photo
+# Copy configureCell from MovieListViewController to CollectionViewController.

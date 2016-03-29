@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -21,6 +22,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let uilgr = UILongPressGestureRecognizer(target: self, action: "addAnnotation:")
         uilgr.minimumPressDuration = 1.0
         mapView.addGestureRecognizer(uilgr)
+        
+        // Step 2: invoke fetchedResultsController.performFetch(nil) here
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {}
+        
+        // Step 9: set the fetchedResultsController.delegate = self
+        fetchedResultsController.delegate = self
     }
     
    func addAnnotation(gestureRecognizer:UIGestureRecognizer) {
@@ -41,6 +50,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             })
         }
     }
+    
+    // MARK: - Core Data Convenience. This will be useful for fetching. And for adding and saving objects as well.
+    
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    // Step 1 - Add the lazy fetchedResultsController property. See the reference sheet in the lesson if you
+    // want additional help creating this property.
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+            managedObjectContext: self.sharedContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        return fetchedResultsController
+        
+    }()
     
     // This delegate method is implemented to respond to taps on the pin annotation.
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collection: UICollectionView!
@@ -37,6 +37,14 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         self.collectionFlowLayout.itemSize = CGSizeMake(dimension, dimension)
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        // Step 2: Perform the fetch
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {}
+        
+        // Step 6: Set the delegate to this view controller
+        fetchedResultsController.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,6 +64,8 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         let fetchRequest = NSFetchRequest(entityName: "Location")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "lat == %@", self.annotation.coordinate.latitude);
+        fetchRequest.predicate = NSPredicate(format: "long == %@", self.annotation.coordinate.longitude);
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.sharedContext,
@@ -116,7 +126,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photos.count
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        
+        return sectionInfo.numberOfObjects
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -132,5 +144,56 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
         // TODO: Tapping on a photo should remove it from the collection
+    }
+    
+    // MARK: - Fetched Results Controller Delegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+//        self.collectionView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController,
+        didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+        atIndex sectionIndex: Int,
+        forChangeType type: NSFetchedResultsChangeType) {
+            
+//            switch type {
+//            case .Insert:
+//                self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+//                
+//            case .Delete:
+//                self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+//                
+//            default:
+//                return
+//            }
+    }
+    
+    func controller(controller: NSFetchedResultsController,
+        didChangeObject anObject: AnyObject,
+        atIndexPath indexPath: NSIndexPath?,
+        forChangeType type: NSFetchedResultsChangeType,
+        newIndexPath: NSIndexPath?) {
+            
+//            switch type {
+//            case .Insert:
+//                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//                
+//            case .Delete:
+//                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//                
+//            case .Update:
+//                let cell = tableView.cellForRowAtIndexPath(indexPath!) as! ActorTableViewCell
+//                let movie = controller.objectAtIndexPath(indexPath!) as! Movie
+//                self.configureCell(cell, movie: movie)
+//                
+//            case .Move:
+//                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//            }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+//        self.tableView.endUpdates()
     }
 }
