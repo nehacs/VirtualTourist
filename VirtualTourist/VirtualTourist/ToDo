@@ -1,4 +1,5 @@
 Fix
+# Currently only reading from memory -- fetch from online if memory is empty
 # Download random images
 # New collection should get new images
 # Maybe get rid of number of images per page, or at least increase it.
@@ -7,9 +8,10 @@ Fix
   - memory leak wrt creating a new controller each time
 
 Todo
+# Save location to memory
+# Save photos to memory
 # Clicking on photo should delete it
 # Collection should move up to fill the view when the photo is deleted
-# Persistence
 # Show placeholder for each image while it is being downloaded -- implement this after persistence
 
 Questions
