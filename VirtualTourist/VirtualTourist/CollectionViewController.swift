@@ -24,7 +24,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     var updatedIndexPaths: [NSIndexPath]!
     
     var annotation: MKAnnotation!
-    var photos = [PhotoData]()
+    var photos = [Photo]()
     
     func setMapViewAnnotation(annotation: MKAnnotation) {
         self.annotation = annotation;
@@ -105,12 +105,14 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
 //                }
                 for (photo) in results {
                     let imageUrlString = photo[FlickrClient.JSONResponseKeys.Url] as? String
-                    let imageURL = NSURL(string: imageUrlString!)
-                    let imageData = NSData(contentsOfURL: imageURL!)
-                    if (imageData != nil) {
-                        let newPhoto = PhotoData(image: UIImage(data: imageData!)!)
-                        self.photos.append(newPhoto)
-                    }
+                    let id = 1
+                    //Int((photo[FlickrClient.JSONResponseKeys.Id] as? String)!)
+                    let photoData : [String:AnyObject] = [
+                        Photo.Keys.ID: id,
+                        Photo.Keys.Url: imageUrlString!
+                    ]
+                    let newPhoto = Photo(dictionary: photoData, context: self.sharedContext)
+                    self.photos.append(newPhoto)
                 }
                 dispatch_async(dispatch_get_main_queue()) {
                     self.collectionView?.reloadData()
@@ -123,7 +125,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func clearPhotos() {
-        photos = [PhotoData]()
+        photos = [Photo]()
         self.collectionView.reloadData()
     }
     
@@ -139,9 +141,11 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
 
     func configureCell(cell: CollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         
-        let photo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! PhotoData
+        let photo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
         
-        let photoImageView = UIImageView(image: photo.image)
+        let imageURL = NSURL(string: photo.url)
+        let imageData = NSData(contentsOfURL: imageURL!)
+        let photoImageView = UIImageView(image: UIImage(data: imageData!)!)
         cell.photo.image = photoImageView.image
     }
     
@@ -155,7 +159,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoReuseID", forIndexPath: indexPath) as! CollectionViewCell
         
 //        let photo = photos[indexPath.row]
-//        let photoImageView = UIImageView(image: photo.image)
+//        let imageURL = NSURL(string: photo.url)
+//        let imageData = NSData(contentsOfURL: imageURL!)
+//        let photoImageView = UIImageView(image: UIImage(data: imageData!)!)
 //
 //        photoImageView.contentMode = UIViewContentMode.Redraw
 //        cell.photo.image = photoImageView.image
